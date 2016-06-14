@@ -9,12 +9,12 @@ class _ResultsImpl extends StreamView<Row> implements Results {
 
   factory _ResultsImpl(int insertId, int affectedRows, List<Field> fields, {Stream<Row> stream: null}) {
     if (stream != null) {
-      var newStream = stream.transform(new StreamTransformer.fromHandlers(handleDone: (EventSink<Row> sink) {
+      var newStream = stream.transform(new StreamTransformer<Row,Row>.fromHandlers(handleDone: (EventSink<Row> sink) {
         sink.close();
       }));
       return new _ResultsImpl._fromStream(insertId, affectedRows, fields, newStream);
     } else {
-      var newStream = new Stream.fromIterable(new List<Row>());
+      var newStream = new Stream<Row>.fromIterable(new List<Row>());
       return new _ResultsImpl._fromStream(insertId, affectedRows, fields, newStream);
     }
   }

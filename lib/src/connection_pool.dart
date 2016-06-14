@@ -365,7 +365,7 @@ abstract class _ConnectionHelpers {
     throw e;
   }
 
-  _removeConnection(cnx);
+  _removeConnection(_Connection cnx);
 }
 
 abstract class QueriableConnection {
